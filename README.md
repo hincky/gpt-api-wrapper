@@ -3,6 +3,9 @@
 
 ## 启动方法
 ```bash
+
+# 要求 python 版本高于 3.9
+
 #设置中科大镜像源(或者其他镜像源，国外服务器不需要设置镜像源)
 pip install -i https://mirrors.ustc.edu.cn/pypi/web/simple pip -U
 pip config set global.index-url https://mirrors.ustc.edu.cn/pypi/web/simple
@@ -18,6 +21,8 @@ pip install -r requirements.txt
 # 可以维护多个key，将轮询调用
 # 项目中自动检查key的免费余额及自动失效已无余额得key部分逻辑已注释，可根据自己的实际情况开启
 # 建议使用付费账号，现在免费账号被封禁的概率太高了
+
+# 修改my_gpt文件中的`auth_token = "your auth token"`
 
 # 后台运行并记录日志
 nohup python3 -u my_gpt.py >> gpt.log 2>&1 &
