@@ -8,7 +8,7 @@ import random
 import time
 import openai
 
-auth_token = "382cf4b492944cd9b11df51649263b1f"
+auth_token = "your auth token"
 
 
 def current_time():
@@ -36,15 +36,6 @@ with open(api_keys_file, 'r') as f:
 messages_cache = {}
 
 
-# todo
-# 增加mysql存储
-# 增加统计数据及内存数据查询
-# 增加每个apikey使用的token量记录
-# 增加访问ip记录
-# 增加查询某个user_id历史记录或者禁止访问
-# 机器人增加进入介绍语
-# 服务、API_KEY不可用告警
-# 想要体验GPT-4内测接口也可以邮件联系我
 @app.route('/chat/gpt-35', methods=['POST'])
 def gpt35_chat():
     if request.args.get("auth_token", '', str) is None or request.args.get("auth_token", '', str) != auth_token:
@@ -73,7 +64,7 @@ def gpt35_chat():
 
     messages.append({"role": "user", "content": content})
 
-    while num_tokens_from_messages(messages) > 3000 and len(messages) > 3:
+    while num_tokens_from_messages(messages) > 2000 and len(messages) > 3:
         del messages[1]
 
     print(current_time(), "=============请求的messages长度： ", len(messages))
@@ -120,7 +111,7 @@ def gpt4_chat():
 
     messages.append({"role": "user", "content": content})
 
-    while num_tokens_from_messages(messages) > 7000 and len(messages) > 3:
+    while num_tokens_from_messages(messages) > 2000 and len(messages) > 3:
         del messages[1]
 
     print(current_time(), "=============请求的messages长度： ", len(messages))
