@@ -230,37 +230,6 @@ def stream_chat():
 
     return Response(generate_numbers(), content_type='text/event-stream')
 
-
-@app.route('/count-to-100', methods=['GET'])
-def count_to_100():
-    def generate_numbers():
-        # record the time before the request is sent
-        start_time = time.time()
-
-        # send a ChatCompletion request to count to 100
-        response = openai.ChatCompletion.create(
-            api_key="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",
-            model='gpt-3.5-turbo',
-            messages=[
-                {'role': 'user', 'content': 'Count to 20, with a comma between each number and no newlines. E.g., 1, 2, 3, ...'}
-            ],
-            temperature=0,
-            stream=True
-        )
-
-        # iterate through the stream of events
-        fullMessage = []
-        for chunk in response:
-            # yield f'{chunk}\n'
-            chunk_message = chunk['choices'][0]['delta']
-            if chunk_message.get('content') is not None:
-                fullMessage.append(chunk_message)
-                yield f"{chunk_message.get('content')}\n"
-
-        print(f"回复内容: {''.join([m.get('content', '') for m in fullMessage])}")
-
-    return Response(generate_numbers(), content_type='text/event-stream')
-
 def check_request_and_log():
     if request.args.get("auth_token", '', str) is None or request.args.get("auth_token", '', str) != auth_token:
         return make_response("auth_token认证失败", 401)
