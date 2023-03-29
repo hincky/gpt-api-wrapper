@@ -27,4 +27,14 @@ pip install -r requirements.txt
 # 后台运行并记录日志
 nohup python3 -u my_gpt.py >> gpt.log 2>&1 &
 
+nohup python3 -u my_gpt_v2.py >> gpt_v2.log 2>&1 &
+
+nohup python3 -u my_gpt_v3.py >> gpt_v3.log 2>&1 &
+
+# 启动alert程序
+nohup python3 -u alert.py  2>&1 &
+
+# 启动proxy程序
+nohup python3 -u proxy_v2.py >> proxy_v2.log 2>&1 &
+
 ```
